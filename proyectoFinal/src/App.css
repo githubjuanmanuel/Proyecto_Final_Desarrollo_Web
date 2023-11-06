@@ -55,8 +55,8 @@ html{
 
 .sideBar-link{
   text-decoration: none;
-  font-size: 2.2rem;
-  color: #8484df;
+  font-size: 2.4rem;
+  color: #4e4eeb;
   margin: 0 auto;
 }
 .sideBar-link:hover{
@@ -163,10 +163,85 @@ html{
 .viewtasks{
   display: flex;
   gap: 1rem;
+  
 }
 .viewtasks .box:nth-child(1){
   flex-basis: calc(50% - 1rem);
 }
 .viewtasks .box:nth-child(2){
   flex-basis: calc(50% - 1rem);
+}
+
+.no-tasks{
+  padding: 1rem;
+  font-size: 1.7rem;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif ;
+}
+.tasks-container{
+  height: 42rem;
+  overflow-y:auto;
+  display: flex;
+  flex-direction: column;
+  gap:.6rem;
+}
+/* ------------------------------------------------------- */
+
+.task-container{
+  background-color: #f0ecec;
+  max-width: 98%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  font-size: 1.6rem;
+  border-radius: .8rem;
+  padding: .5rem;
+}
+
+.p-task{
+  color: #353538;
+  font-weight: 600;
+  margin: .5rem;
+}
+.p-task span{
+ color: #242425;
+ font-weight: 500;
+ max-width: 90%;
+}
+.button-container{
+  display: flex;
+  justify-content: end;
+  gap: .7rem;
+}
+
+.button{
+  padding: .5rem;
+  border-radius: .6rem;
+  border-color: transparent;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.complete{
+  background-color: rgb(23, 160, 23);
+  color: #ffff;
+}
+.complete:hover{
+  cursor: pointer;
+  background-color: rgb(14, 179, 14);
+}
+.edit{
+  background-color: rgb(46, 46, 207);
+  color: #ffff;
+}
+.edit:hover{
+  cursor: pointer;
+  background-color: rgb(67, 67, 250);
+}
+.delete{
+  background-color: red;
+  color: #ffff;
+}
+.delete:hover{
+  cursor: pointer;
+  background-color: rgb(223, 46, 46);
 }
