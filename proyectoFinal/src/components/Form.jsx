@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Error from "./Error"
 
 
-const Form = ({task, setTask, tasks, setTasks}) => {
+const Form = ({task, setTask, tasks, setTasks,completedTasks, setCompletedTasks}) => {
 
 
   
@@ -10,7 +10,8 @@ const Form = ({task, setTask, tasks, setTasks}) => {
   const [subject, setSubject] = useState("");
   const [deadLine, setDeadLine] = useState("");
   const [description, setDescription] = useState("");
-  const [completed, setCompleted] = useState();
+  const [completed, setCompleted] = useState(false);
+const [id, setId] = useState();
 
   const [error,setError] = useState(false);
 
@@ -20,7 +21,8 @@ const Form = ({task, setTask, tasks, setTasks}) => {
       setSubject(task.subject)
       setDeadLine(task.deadLine)
       setDescription(task.description)
-      setCompleted(false);
+      setCompleted(task.completed)
+      setId(task.id)
     }
     
   }, [task]);
@@ -44,29 +46,35 @@ const Form = ({task, setTask, tasks, setTasks}) => {
     setError(false);
 
     const newTask = {
-      name, subject, deadLine, description, completed
+      name, subject, deadLine, description, completed,id
     }
 
-    if (task.id) {
-      //Editar la tarea
-      newTask.id = task.id
-      const taskUpdate = tasks.map(taskState => taskState.id === task.id ? newTask : taskState)
-      setTasks(taskUpdate)
-      setTask({})
-    }else{
+    if (!task.id) {
       //Nueva tarea
       newTask.id = generarId()
       setTasks([...tasks,newTask])
-
+      const Alert = alert("Tarea registrada")
+    }else {
+      newTask.id = task.id
+      let taskUpdate 
+      if (task.completed) {
+        taskUpdate = completedTasks.map(taskState => taskState.id === task.id ? newTask : taskState)
+        setCompletedTasks(taskUpdate)
+      }else{
+        taskUpdate = tasks.map(taskState => taskState.id === task.id ? newTask : taskState)
+        setTasks(taskUpdate)
+      }
+      setTask({})
+      const Alert = alert("Tarea Editada")
     }
+    //Reinicio del formulario
     
-    //Mensaje para confirmar el registro de la tarea y reinicio del formulario
-    const tareaRegistrada = alert("Tarea registrada")
     setName("")
     setSubject("")
     setDeadLine("")
     setDescription("")
   } 
+
 
   return (
     <div>

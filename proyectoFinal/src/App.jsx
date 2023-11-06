@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./routes/Home";
@@ -7,9 +7,21 @@ import ViewTasks from "./routes/ViewTasks";
 import Layout from "./components/Layout";
 
 function App() {
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState(
+    JSON.parse(localStorage.getItem('tasks')) || []
+  );
   const [task, setTask] = useState({});
-  const [completedTasks, setCompletedTasks] = useState([]);
+  const [completedTasks, setCompletedTasks] = useState(
+    JSON.parse(localStorage.getItem('completedTasks')) || []
+  );
+
+  useEffect(() => {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+  }, [tasks]);
+  console.log(localStorage);
+  useEffect(() => {
+    localStorage.setItem('completedTasks', JSON.stringify(completedTasks));
+  }, [completedTasks]);
 
   return (
     <BrowserRouter>
@@ -24,6 +36,8 @@ function App() {
                 setTask={setTask}
                 tasks={tasks}
                 setTasks={setTasks}
+                completedTasks={completedTasks}
+                setCompletedTasks={setCompletedTasks}
               />
             }
           />
@@ -31,7 +45,6 @@ function App() {
             path="viewTasks"
             element={
               <ViewTasks
-                task={task}
                 setTask={setTask}
                 tasks={tasks}
                 setTasks={setTasks}
