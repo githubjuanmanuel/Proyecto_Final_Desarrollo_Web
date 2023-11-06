@@ -3,9 +3,7 @@ import Form from '../components/Form'
 
 
 
-const NewTask = () => {
-  const [task, setTask] = useState({})
-  const [tasks, setTasks] = useState([])
+const NewTask = ({ task, setTask, tasks, setTasks}) => {
   return (
     <div className='container'>
         <h2 className='title title-NewTask'>Añade una nueva tarea</h2>
